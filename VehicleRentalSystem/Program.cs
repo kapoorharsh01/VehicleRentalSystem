@@ -401,7 +401,7 @@ namespace VehicleRentalSystem
         static void ShowAvailableVehicles(RentalDbContext context)
         {
 
-            foreach (Vehicle vehicle in context.Vehicles.ToList())
+            foreach (var vehicle in context.Vehicles.ToList())
             {
 
                 if (vehicle.IsAvailable)
@@ -423,7 +423,7 @@ namespace VehicleRentalSystem
             -that's y rental.Vehicle?.Model will show data
             */
 
-            foreach (Rental rental in context.Rentals
+            foreach (var rental in context.Rentals
                 .Include(r => r.Vehicle)
                 .Include(r => r.Customer) //Include() loads the data
                 .ToList())
