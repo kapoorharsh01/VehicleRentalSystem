@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using VehicleRentalSystem.Template;
+using static System.Net.WebRequestMethods;
 
 namespace VehicleRentalSystem.Template
 {
@@ -436,7 +437,8 @@ namespace VehicleRentalSystem
                 .Include(r => r.Vehicle)
                 .Include(r => r.Customer) //Include() loads the data
                 .ToList())
-                //in case i won't add INCLUDE Entity Framework doesn't auto load navigation properties
+            //in case i won't add INCLUDE Entity Framework doesn't auto load navigation properties
+            // referred this article www.learnentityframeworkcore.com/dbset/querying-data
             {
 
                 Console.WriteLine($"Rental ID: {rental.RentalId}, Vehicle: {rental.Vehicle.Model}, Customer: {rental.Customer.Name}, Start: {rental.StartDate:yyyy-MM-dd}, End: {rental.EndDate:yyyy-MM-dd}, Total: ${rental.TotalAmount}");
