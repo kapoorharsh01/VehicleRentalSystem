@@ -13,11 +13,10 @@ namespace VehicleRentalSystem.Template
     {
         [Key]
         public int VehicleId { get; set; }
-        public string Model { get; set; }
         public string Brand { get; set; }
+        public string Model { get; set; }
         public bool IsAvailable { get; set; } = true;
         public int DailyRate { get; set; }
-
         public virtual void DisplayInfo()
         {
             Console.WriteLine($"ID: {VehicleId}, Model: {Model}, Rate: {DailyRate}, Available: {IsAvailable}");
@@ -29,25 +28,23 @@ namespace VehicleRentalSystem.Template
                 Console.WriteLine("Ops, already rented"); return;
             }
             IsAvailable = false;
-            Console.WriteLine($"Car rented from {start:yyyy-MM-dd} to {end:yyyy-MM-dd}");
+            Console.WriteLine($"{Model} rented from {start:yyyy-MM-dd} to {end:yyyy-MM-dd}");
         }
-
         public void ReturnVehicle()
         {
             IsAvailable = true;
-            Console.WriteLine("Car Returned, Thanks");
+            Console.WriteLine($"{Model} Returned, Thanks");
         }
     }
-    public class Car : Vehicle, IRentable
+    public class Car : Vehicle
     {
         public int NumOfDoors { get; set; }
-
         public override void DisplayInfo()
         {
             base.DisplayInfo();
             Console.WriteLine($"No. of Doors :{NumOfDoors}");
         }
-
+        /*
         public void Rent(DateTime start, DateTime end)
         {
 
@@ -63,18 +60,17 @@ namespace VehicleRentalSystem.Template
         {
             IsAvailable = true;
             Console.WriteLine("Car Returned, Thanks");
-        }
+        }*/
     }
-    public class Bike : Vehicle, IRentable
+    public class Bike : Vehicle
     {
         public int EngineCapacity { get; set; }
-
         public override void DisplayInfo()
         {
             base.DisplayInfo();
             Console.WriteLine($"Engine Capacity : {EngineCapacity}");
         }
-        public void Rent(DateTime start, DateTime end)
+        /*public void Rent(DateTime start, DateTime end)
         {
 
             if (!IsAvailable)
@@ -90,7 +86,7 @@ namespace VehicleRentalSystem.Template
         {
             IsAvailable = true;
             Console.WriteLine("Bike Returned, Thanks");
-        }
+        }*/
     }
     public class Customer
     {
@@ -108,7 +104,6 @@ namespace VehicleRentalSystem.Template
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public decimal TotalAmount { get; set; }
-
         public decimal CalculateTotal()
         {
             return (EndDate - StartDate).Days * Vehicle.DailyRate;
@@ -196,9 +191,7 @@ namespace VehicleRentalSystem
                     default: Console.WriteLine("Invalid choice, Try again !"); break;
                 }
             }
-
         }
-
         static void AddVehicle(RentalDbContext context)
         {
 
@@ -276,11 +269,9 @@ namespace VehicleRentalSystem
             {
                 Console.WriteLine("Invalid Vehicle Type");
             }
-
         }
         static void RegisterCustomer(RentalDbContext context)
         {
-
             Console.WriteLine("Enter Customer ID");
             if (!int.TryParse(Console.ReadLine(), out int id))
             {
