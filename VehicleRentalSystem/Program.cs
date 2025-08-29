@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using VehicleRentalSystem.Template;
-using static System.Net.WebRequestMethods;
 
 namespace VehicleRentalSystem.Template
 {
